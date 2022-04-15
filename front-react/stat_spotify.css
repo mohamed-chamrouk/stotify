@@ -1,0 +1,82 @@
+.stat_spotify_details {
+    display: flex;
+    flex-direction: row;
+}
+
+.stat_spotify_details>a {
+    font-family: 'Inter Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #838383;
+}
+
+.rank {
+    font-family: 'Inter Semi Bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 17px;
+    color: #1D413D;
+    text-align: center;
+}
+
+.track_img {
+    height: 40px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+tr {
+    background: white;
+    margin-bottom: 30px;
+}
+
+.stat_top_spotify_one p {
+    font-family: 'Inter Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    /* identical to box height */
+
+
+    color: #1D413D;
+}
+
+.stat_top_spotify_two p {
+    
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    font-family: 'Inter Medium';
+    /* identical to box height */
+
+
+    color: #1D413D;
+}
+
+.stat_indicator_wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 19px;
+    
+}
+
+.stat_indicator {
+    background: #6DF0D1;
+    font-family: 'Inter Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1D413D;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+}

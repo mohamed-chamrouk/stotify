@@ -1,0 +1,30 @@
+.graph {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 100%;
+    background: #1D413D;
+}
+
+.main_graph > p {
+    font-family: 'Inter Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    color: #000000;
+}
+
+.graph_details {
+    display: flex;
+    flex-direction: row;
+}
+
+.graph_details>a {
+    font-family: 'Inter Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #838383;
+}
