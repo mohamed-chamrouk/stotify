@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: stotifyHandler.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: stotifyHandler.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const { error } = require('console');
+var SpotifyWebApi = require('spotify-web-api-node');
+
+var express = require('express')
+var router = express.Router()
+
+var setupModule = require('./setupHandler.js')
+var creds = setupModule.creds
+var dbHandlerModule = require('./dbHandler.js');
+var insertTracks = dbHandlerModule.insertTracks
+
+var intervalAuthRunning = false;
+var intervalAuthStopper = false;
+var intervalFetchStatsRunning = false;
+var intervalFetchStatsStopper = false;
+
+var spotifyApi = new SpotifyWebApi({
+    clientId: creds.clientId,
+    clientSecret: creds.clientSecret,
+    redirectUri: creds.redirect_uri
+});
+
+/**
+ * Function that initiates an infinite loop to refresh the access token given by the Spotify Web API
+ */
+function intervalAuth() {
+    spotifyApi.refreshAccessToken().then(
+        function (data) {
+            console.log(`[stotify] @ ${(new Date()).toLocaleString()} - Refreshing the access token`)
+            spotifyApi.setAccessToken(data.body['access_token'])
+        }, function (err) {
+            console.error(`[stotify] @ ${(new Date()).toLocaleString()} - Refreshing the access token failed, terminating intervalAuth loop`)
+            interAuthStopper = true
+        }
+    )
+
+    if (!intervalAuthStopper) {
+        intervalAuthRunning = true
+        setTimeout(intervalAuth, 3000000)
+    } else {
+        intervalAuthRunning = false
+    }
+}
+
+/**
+ * Function that initiates an infinite loop to fetch recent songs listened to by the user, process them and send them to be saved to the collection
+ */
+function intervalFetchStats() {
+    let recentTracks = []
+
+    spotifyApi.getMyRecentlyPlayedTracks({
+        limit: 50
+    }).then(function (data) {
+
+        data.body.items.forEach((item) => {
+
+            recentTracks.push(
+                {
+                    _id: item.played_at,
+                    trackName: item.track.name,
+                    trackUrl: item.track.external_urls.spotify,
+                    trackImg: item.track.album.images[0].url,
+                    trackPop: item.track.popularity,
+                    trackDuration: item.track.duration_ms,
+                    artistName: item.track.artists[0].name,
+                    artistUrl: item.track.artists[0].external_urls.spotify,
+                    artistId: item.track.artists[0].id,
+                    featuredArtists: item.track.artists,
+                    albumName: item.track.album.name,
+                    albumUrl: item.track.album.external_urls.spotify,
+                    albumImg: item.track.album.images[0].url,
+                })
+        })
+
+        console.log(`[stotify] @ ${(new Date()).toLocaleString()} - Updated/Inserted ${recentTracks.length} tracks`)
+
+        return recentTracks
+    }, function (err) {
+        console.log('Something went wrong!', err);
+        if (err.body.error.status === 401) {
+            res.redirect('/setup')
+        }
+        intervalFetchStatsStopper = true;
+        return 'error'
+    }).then(function (data) {
+        if (data === 'error') {
+            return 'error'
+        } else {
+            insertTracks(data)
+        }
+    });
+
+    if (!intervalFetchStatsStopper) {
+        intervalFetchStatsRunning = true
+        setTimeout(intervalFetchStats, 4200000)
+    } else {
+        intervalFetchStatsRunning = false
+    }
+}
+
+/**
+ * Endpoint used by the Spotify Web API. Starts the infinite loops and gets the fetching going.
+ * @name get/callback
+ * @function
+ * @memberof module:routers/stotifyHandler
+ */
+router.get("/callback", (req, res) => {
+    var code = req.query.code || null;
+
+    spotifyApi.authorizationCodeGrant(code).then(function (data) {
+        spotifyApi.setAccessToken(data.body['access_token'])
+        spotifyApi.setRefreshToken(data.body['refresh_token'])
+        console.log(`[stotify] @ ${(new Date()).toLocaleString()} - Successfully retrieved the tokens`)
+    }, function (err) {
+        if (err.statusCode === 400) {
+            console.error(`[stotify] @ ${(new Date()).toLocaleString()} - Authorization code expired, redirecting to the setup page`)
+            res.redirect('/setup')
+            return 'error'
+        }
+    }).then(function (txt) {
+        if (txt === 'error') {
+            return 'error'
+        }
+        !intervalAuthRunning &amp;&amp; intervalAuth()
+    }).then(function (txt) {
+        if (txt === 'error') {
+            return 'error'
+        }
+        !intervalFetchStatsRunning &amp;&amp; intervalFetchStats()
+    }).then(function (txt) {
+        if (txt !== 'error') {
+            res.redirect('/')
+        }
+    })
+})
+
+module.exports = router</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getDelay">getDelay</a></li><li><a href="global.html#insertTracks">insertTracks</a></li><li><a href="global.html#intervalAuth">intervalAuth</a></li><li><a href="global.html#intervalFetchStats">intervalFetchStats</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Mon Apr 18 2022 02:27:28 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
