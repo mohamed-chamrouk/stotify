@@ -4,7 +4,7 @@ var router = express.Router()
 const MongoClient = require('mongodb').MongoClient
 var stotifyCollection;
 var db;
-const url = 'mongodb://mongoservice:27017'
+const url = 'mongodb://localhost:27017'
 
 MongoClient.connect(url, {
     useNewUrlParser: true,

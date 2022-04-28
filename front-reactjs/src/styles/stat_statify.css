@@ -1,9 +1,9 @@
-.stat_spotify_details {
+.stat_statify_details {
     display: flex;
     flex-direction: row;
 }
 
-.stat_spotify_details>a {
+.stat_statify_details>a {
     font-family: 'Inter Medium';
     font-style: normal;
     font-weight: 500;
@@ -33,7 +33,7 @@ tr {
     margin-bottom: 30px;
 }
 
-.stat_top_spotify_one p {
+.stat_top_statify_one p {
     font-family: 'Inter Medium';
     font-style: normal;
     font-weight: 500;
@@ -45,7 +45,7 @@ tr {
     color: #1D413D;
 }
 
-.stat_top_spotify_two p {
+.stat_top_statify_two p {
     
     font-style: normal;
     font-weight: 500;
@@ -62,7 +62,7 @@ tr {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 19px;
     
 }
