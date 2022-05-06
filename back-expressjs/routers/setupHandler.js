@@ -26,7 +26,7 @@ router.get("/setup", (req, res) => {
             client_id: creds.clientId,
             scope: creds.scope,
             redirect_uri: creds.redirect_uri,
-            state: state
+            state: state,
         }));
 })
 

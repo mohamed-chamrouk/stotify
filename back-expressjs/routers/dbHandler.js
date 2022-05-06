@@ -27,7 +27,7 @@ var router = express.Router()
  */
 function insertTracks(data) {
     stotifyCollection.insertMany(data, (err, results) => {
-        if (err.code === 11000) {
+        if (err.code && err.code === 11000) {
             console.log(`[stotify] @ ${(new Date()).toLocaleString()} - MongoDB : Some insert clashed with existing entries.`)
         }
     })
@@ -40,7 +40,7 @@ function insertTracks(data) {
  */
 function getDelay(req) {
     const curDate = new Date()
-    const delay = (parseInt(req.query.days) ? req.query.days : 0)
+    const delay = (parseInt(req.query.days) ? req.query.days : 900000)
     const resultDate = curDate.setDate(curDate.getDate() - delay)
     return resultDate
 }
@@ -74,9 +74,9 @@ function dateChecker(date, cursor) {
  */
 router.get('/getNumberTracks', (req, res) => {
     if (req.query.unique === 'yes') {
-        stotifyCollection.distinct("trackName", { _id: { $gte: new Date(getDelay(req)).toISOString() } }).then(function (data) { res.json({ length: data.length }) })
+        stotifyCollection.distinct("trackName", { _id: { $gte: new Date(getDelay(req)).toISOString() } }).then(function (data) { res.json({ len: data.length }) })
     } else {
-        stotifyCollection.countDocuments({ _id: { $gte: new Date(getDelay(req)).toISOString() } }).then(function (data) { res.json({ length: data }) })
+        stotifyCollection.countDocuments({ _id: { $gte: new Date(getDelay(req)).toISOString() } }).then(function (data) { res.json({ len: data }) })
     }
 })
 
@@ -88,7 +88,7 @@ router.get('/getNumberTracks', (req, res) => {
  * @param {string} days Number of days prior to today for the analytic result
  */
 router.get('/getNumberArtists', (req, res) => {
-    stotifyCollection.distinct("artistName", { _id: { $gte: new Date(getDelay(req)).toISOString() } }).then(function (data) { res.json({ length: data.length }) })
+    stotifyCollection.distinct("artistName", { _id: { $gte: new Date(getDelay(req)).toISOString() } }).then(function (data) { res.json({ len: data.length }) })
 })
 
 /**
@@ -99,7 +99,7 @@ router.get('/getNumberArtists', (req, res) => {
 * @param {string} days Number of days prior to today for the analytic result
 */
 router.get('/getNumberAlbums', (req, res) => {
-    stotifyCollection.distinct("albumName", { _id: { $gte: new Date(getDelay(req)).toISOString() } }).then(function (data) { res.json({ length: data.length }) })
+    stotifyCollection.distinct("albumName", { _id: { $gte: new Date(getDelay(req)).toISOString() } }).then(function (data) { res.json({ len: data.length }) })
 })
 
 /**
@@ -111,7 +111,7 @@ router.get('/getNumberAlbums', (req, res) => {
 */
 router.get('/getNumberMinutesPlayed', (req, res) => {
     stotifyCollection.find({ _id: { $gte: new Date(getDelay(req)).toISOString() } }).toArray((err, data) => {
-        res.json({ minutesPlayed: data.map((item) => item.trackDuration).reduce((prev, next) => prev + next, 0) })
+        res.json({ minutesPlayed: data.map((item) => typeof (item.trackDuration) === "number" ? item.trackDuration : 0).reduce((prev, next) => prev + next, 0) })
     })
 })
 
@@ -175,6 +175,39 @@ router.get('/getMetricListenedTo', (req, res) => {
         default:
             console.log(`[stotify] @ ${(new Date()).toLocaleString()} - No metric found`)
     }
+
+})
+
+/**
+* Get how many/much of the metric you've listened to between the two dates given
+* @name get/getPlayedStats
+* @function
+* @memberof module:routers/dbHandler
+* @param {string} metric The metric for the analytic result, either minutes or tracks (albums and artists)
+* @param {string} date_start The beginning of the time range, defaults to the first Date
+* @param {string} date_end The end of the time range, defaults to the request's date
+* @returns {json} Json object with the date and the metric corresponding to it
+*/
+router.get('/stotify/getPlayedStats', (req, res) => {
+    const getDaysArray = function (start, end = new Date()) {
+        for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+            arr.push(new Date(dt));
+        }
+        let jsonOutput = {}
+        arr.forEach((v) => jsonOutput[v.toISOString().slice(0, 10)] = 0);
+        return jsonOutput
+    };
+
+    stotifyCollection.find({}).toArray((err, data) => {
+        let statOutput = getDaysArray(getDelay(req))
+        data.forEach((item) => {
+            index = item._id.slice(0, 10)
+            typeof (statOutput[index]) === "number" ? statOutput[index] = statOutput[index] + 1 : statOutput[index] = 1
+        })
+
+        res.json(statOutput)
+    })
+
 
 })
 

@@ -4,16 +4,21 @@ import App from './App';
 import { Provider } from 'react-redux';
 
 import store from './store.js'
-import { fetchMinutes } from './components/stotify/stotifySlice';
+import { fetchMisc } from './components/stotify/stotifySlice';
 
-store.dispatch(fetchMinutes(2))
-//store.dispatch(fetchMinutes(10000))
+import Setup from './components/setup/Setup.js'
 
+/*
+store.dispatch(fetchMisc('artists'))
+store.dispatch(fetchMisc('albums'))
+store.dispatch(fetchMisc('tracks'))
+store.dispatch(fetchMisc('date'))
+*/
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Setup />
     </Provider>
   </React.StrictMode>
 );

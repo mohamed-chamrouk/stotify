@@ -1,0 +1,106 @@
+.setup_wrapper {
+
+    position: fixed;
+    display: grid;
+    grid-template-columns: repeat(3, 240px);
+    grid-gap: 10px 10px;
+
+    bottom: 10%;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.setup_container {
+    grid-column: 2;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 29px;
+}
+
+.setup_logo>img {
+    width: 100%;
+}
+
+.setup_logo_name>a {
+    font-family: 'Inter Black';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 54px;
+    line-height: 47px;
+    text-align: center;
+    color: #6DF0D1;
+}
+
+.setup_status {
+    display: flex;
+    flex-direction: row;
+    gap: 4px 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+.setup_status>img {
+    height: 12px;
+    width: 12px;
+    stroke: #F06D6D;
+}
+
+.setup_status_txt {
+    font-family: 'Inter Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23.8765px;
+    line-height: 87.52%;
+    /* identical to box height, or 21px */
+
+    text-align: center;
+
+    color: #C8C8C8;
+}
+
+.setup_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0px;
+    background: #F8F8F8;
+    cursor: pointer;
+    width:100%
+}
+
+.setup_button_txt {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    outline: inherit;
+    cursor: pointer;
+
+
+    font-family: 'Inter Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24.7531px;
+    line-height: 87.52%;
+    /* identical to box height, or 22px */
+
+    text-align: center;
+
+    color: #1D413D;
+}
+
+.setup_button:hover {
+    box-shadow: 6px 6px #000000;
+    background-color: #e0e0e0;
+    -webkit-transform: translateX(-3px);
+    transform: translateX(-3px);
+    transition: .5s ease;
+}

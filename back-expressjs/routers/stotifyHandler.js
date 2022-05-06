@@ -148,7 +148,7 @@ router.get("/callback", (req, res) => {
  * @param {number} limit The number of artists wanted
  */
 router.get("/spotify/getMyTopArtists", (req, res) => {
-    var term = req.query.term in ['short_term', 'medium_term', 'long_term'] ? req.query.term : 'medium_term'
+    var term = ["short_term", "medium_term", "long_term"].includes(req.query.term) ? req.query.term : "medium_term"
     limit = Math.max(0, Math.min(parseInt(req.query.limit ? req.query.limit : 50), 50))
     spotifyApi.getMyTopArtists({ time_range: term, limit: limit })
         .then(function (data) {
@@ -184,7 +184,7 @@ function getMyTopArtists(term = 'long_term', limit = 50) {
  * @param {number} limit The number of tracks wanted
  */
 router.get("/spotify/getMyTopTracks", (req, res) => {
-    var term = req.query.term in ['short_term', 'medium_term', 'long_term'] ? req.query.term : 'medium_term'
+    var term = ["short_term", "medium_term", "long_term"].includes(req.query.term) ? req.query.term : "medium_term"
     limit = Math.max(0, Math.min(parseInt(req.query.limit ? req.query.limit : 50), 50))
     spotifyApi.getMyTopTracks({ time_range: term, limit: limit })
         .then(function (data) {
@@ -223,21 +223,29 @@ router.get('/getPopularityIndex', (req, res) => {
     limit = Math.max(0, Math.min(parseInt(req.query.limit ? req.query.limit : 50), 50))
     spotifyApi.getMyTopTracks({ time_range: term, limit: limit })
         .then(function (data) {
-            console.log(data.body.items)
-            const popularityIndex = data.body.items.forEach((item) => {return item.popularity}).reduce((prev, next) => prev + next, 0)
+            //console.log(data.body.items)
+            const popularityIndex = data.body.items.map((item) => {
+                return item.popularity}).reduce((prev, next) => prev + next, 0)/data.body.items.length
+
+            
 
             switch (true) {
                 case popularityIndex > 80:
                     res.json({ popInd: popularityIndex, status: 'Normand', desc: 'You follow the mass, try something else for a change' })
-                case popularityIndex > 40 && popularityIndex < 60:
+                    break;
+                case popularityIndex < 60 && popularityIndex > 40:
                     res.json({ popInd: popularityIndex, status: 'Explorer', desc: 'You know a thing or two about underground art, don\'t brag about it' })
-                case popularityIndex > 20 && popularityIndex < 40:
+                    break;
+                case popularityIndex < 40 && popularityIndex > 20:
                     res.json({ popInd: popularityIndex, status: 'Scientist', desc: 'You\'ve been where few have ever been, try listening to some Drake once in a while' })
+                    break;
                 case popularityIndex < 20:
                     res.json({ popInd: popularityIndex, status: 'Stalker', desc: 'Bro, you good?' })
+                    break;
                 default:
                     console.log(`[stotify] @ ${(new Date()).toLocaleString()} - Popularity Index didn't fit in any of the cases, value : ${popularityIndex}`)
                     res.json({bogus: 'boyy'})
+                    break;
             }
         }, function (err) {
             console.error(`[stotify] @ ${(new Date()).toLocaleString()} - Something went wrong`, err)

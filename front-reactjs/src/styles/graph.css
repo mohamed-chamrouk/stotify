@@ -19,6 +19,12 @@
     flex-direction: row;
 }
 
+.graph_details>a:hover {
+    color: #383838;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
 .graph_details>a {
     font-family: 'Inter Medium';
     font-style: normal;
