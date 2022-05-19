@@ -1193,3 +1193,11 @@
     "href": "https://api.spotify.com/v1/me/top/tracks?limit=5&offset=0&time_range=short_term",
     "next": "https://api.spotify.com/v1/me/top/tracks?limit=5&offset=5&time_range=short_term"
 }
+
+
+
+
+
+
+https://accounts.spotify.com/authorize?Access-Control-Allow-Origin=*&response_type=code&client_id=0ee1b1beee59455681646cd0a8967a15&scope=user-read-recently-played user-top-read&redirect_uri=http://127.0.0.1:5000/callback
+https://accounts.spotify.com/authorize?Access-Control-Allow-Origin=%2A&response_type=code&client_id=0ee1b1beee59455681646cd0a8967a15&scope=user-read-recently-played%20user-top-read&redirect_uri=http%3A%2F%2F127.0.0.1%3A5000%2Fcallback

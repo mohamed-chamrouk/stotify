@@ -211,6 +211,49 @@ router.get('/stotify/getPlayedStats', (req, res) => {
 
 })
 
+/**
+* Get the top artists from the date of first launch
+* @name get/stotify/getTopArtists
+* @function
+* @memberof module:routers/dbHandler
+* @returns {Array} Array of objects with name of artist and number of times played
+*/
+router.get('/stotify/getTopArtists', (req, res) => {
+    stotifyCollection.aggregate(
+        [{
+            $group: {
+                _id: '$artistName',
+                count: { $sum: 1 },
+                img: {$last: "$albumImg"}
+            }
+        }]
+    ).sort({count: -1}).toArray((err, data) => {
+        res.send({value: data})
+    })
+})
+
+/**
+* Get the top trakcs from the date of first launch
+* @name get/stotify/getTopTracks
+* @function
+* @memberof module:routers/dbHandler
+* @returns {Array} Array of objects with name of track and number of times played
+*/
+router.get('/stotify/getTopTracks', (req, res) => {
+    stotifyCollection.aggregate(
+        [{
+            $group: {
+                _id: '$trackName',
+                count: { $sum: 1 },
+                img: {$last: "$albumImg"},
+                artist: {$last: "$artistName"}
+            }
+        }]
+    ).sort({count: -1}).toArray((err, data) => {
+        res.send({value: data})
+    })
+})
+
 
 module.exports = router
 module.exports.insertTracks = insertTracks

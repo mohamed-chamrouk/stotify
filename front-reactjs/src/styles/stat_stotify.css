@@ -13,19 +13,18 @@
 }
 
 .rank {
-    font-family: 'Inter Semi Bold';
+    font-family: 'Inter Bold';
     font-style: normal;
     font-weight: 500;
-    font-size: 18px;
-    line-height: 17px;
+    font-size: 39px;
+    line-height: 47px;
     color: #1D413D;
     text-align: center;
 }
 
 .track_img {
-    height: 40px;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    height: 60px;
+    vertical-align: top;
 }
 
 tr {
@@ -46,7 +45,7 @@ tr {
 }
 
 .stat_top_statify_two p {
-    
+
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -64,7 +63,7 @@ tr {
     align-items: center;
     justify-content: flex-start;
     gap: 19px;
-    
+
 }
 
 .stat_indicator {
@@ -79,4 +78,40 @@ tr {
     padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.stotify-table-number {
+    font-family: 'Inter Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 16px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.stotify-table-fois {
+    font-family: 'Inter Regular';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 7px;
+
+    color: #000000;
+}
+
+.stotify-table-fois-container {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.stotify-table-fois-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 50%;
+    gap: 3px 0px;
 }

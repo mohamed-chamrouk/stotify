@@ -2,47 +2,50 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import store from '../../store'
-import { fetchTopArtists, fetchTopTracks, selectTops } from './spotifySlice'
-import SpotifyStatsItem from './SpotifyStatsItem'
-import SpotifyPlaceHolder from './SpotifyPlaceHolder'
+import { fetchStotifyTopArtists, fetchStotifyTopTracks, selectMetrics } from './stotifySlice'
+import StotifyTopItem from './StotifyTopItem'
+import StotifyPlaceHolder from './StotifyPlaceHolder'
 
-store.dispatch(fetchTopArtists("long_term", "5"))
-store.dispatch(fetchTopTracks("long_term", "5"))
+store.dispatch(fetchStotifyTopArtists("long_term", "5"))
+store.dispatch(fetchStotifyTopTracks("long_term", "5"))
 
-function SpotifyStats() {
-    const topArtist = useSelector(selectTops).filter(item => item.id.includes("fetch_artists"))[0]
-    const topTrack = useSelector(selectTops).filter(item => item.id.includes("fetch_tracks"))[0]
+function StotifyTop() {
+    const topArtist = useSelector(selectMetrics).filter(item => item.id.includes("fetch_stotify_top_artists"))[0]
+    const topTrack = useSelector(selectMetrics).filter(item => item.id.includes("fetch_stotify_top_tracks"))[0]
 
-    const renderedArtistList = topArtist === undefined ? <SpotifyPlaceHolder type={"artist"} /> : topArtist.value.map((item) => {
+    console.log(topArtist)
+    console.log(topTrack)
+
+    const renderedArtistList = topArtist === undefined || topArtist.value === undefined ? <StotifyPlaceHolder type={"artist"} /> : topArtist.value.slice(0,5).map((item) => {
         return (
-            <SpotifyStatsItem top={item} type={"artist"} key={item.id} />
+            <StotifyTopItem top={item} rank={topArtist.value.indexOf(item)+1} type={"artists"} key={topArtist.value.indexOf(item)+1} />
         )
     })
 
-    const renderedTrackList = topTrack === undefined ? <SpotifyPlaceHolder type={"track"} /> : topTrack.value.map((item) => {
+    const renderedTrackList = topTrack === undefined || topTrack.value === undefined ? <StotifyPlaceHolder type={"track"} /> : topTrack.value.slice(0,5).map((item) => {
         return (
-            <SpotifyStatsItem top={item} type={"track"} key={item.id} />
+            <StotifyTopItem top={item} rank={topTrack.value.indexOf(item)+1} type={"tracks"} key={topTrack.value.indexOf(item)+1} />
         )
     })
 
     return (
         <>
-            <div className="stat_top_spotify_one">
+            <div className="stat_top_statify_one">
                 <div className="stat_indicator_wrap">
                     <div className="stat_indicator">
-                        SPOTIFY
+                        STOTIFY
                     </div>
                     <p>Musiques les plus écoutées</p>
                 </div>
-                <div className="stat_spotify_details">
+                <div className="stat_statify_details">
                     <a> VOIR LES STATISTIQUES DETAILLES </a>
                 </div>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: '100%', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
                         <tr style={{ verticalAlign: 'middle' }}>
-                            <th style={{ width: '60px' }}>Song art</th>
-                            <th style={{ width: '10%' }} />
-
+                            <th style={{ width: '60px' }} />
+                            <th style={{ width: '10%' }}>Song art</th>
+                            <th>Titre</th>
                             <th>Titre</th>
                         </tr>
                     </thead>
@@ -51,22 +54,22 @@ function SpotifyStats() {
                     </tbody>
                 </table>
             </div>
-            <div className="stat_top_spotify_two">
+            <div className="stat_top_statify_two">
                 <div className="stat_indicator_wrap">
                     <div className="stat_indicator">
-                        SPOTIFY
+                        STOTIFY
                     </div>
                     <p>Artistes les plus écoutées</p>
                 </div>
-                <div className="stat_spotify_details">
+                <div className="stat_statify_details">
                     <a> VOIR LES STATISTIQUES DETAILLES </a>
                 </div>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: '100%', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
                         <tr style={{ verticalAlign: 'middle' }}>
-                            <th style={{ width: '60px' }}>Song art</th>
-                            <th style={{ width: '10%' }} />
-
+                        <th style={{ width: '60px' }} />
+                            <th style={{ width: '10%' }}>Song art</th>
+                            <th>Titre</th>
                             <th>Titre</th>
                         </tr>
                     </thead>
@@ -79,4 +82,4 @@ function SpotifyStats() {
     )
 }
 
-export default SpotifyStats
+export default StotifyTop

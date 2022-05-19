@@ -1,48 +1,54 @@
-import React from 'react'
 import store from '../../store'
+import { useSelector } from 'react-redux'
+
+import { Link, useNavigate } from 'react-router-dom'
 
 import '../../styles/setup.css'
 import logo from '../../ressources/stotify_logo.svg'
 import ellipse_red from '../../ressources/ellipse_red.svg'
 import ellipse_green from '../../ressources/ellipse_green.svg'
 
-import { fetchSetup } from './setupSlice'
+import { fetchStatus, selectStatus } from './setupSlice'
 
-store.dispatch(fetchSetup())
+console.log(process.env.STOTIFY_REDIRECT_URI)
+const AUTH_URL = `https://accounts.spotify.com/authorize?Access-Control-Allow-Origin=%2A&response_type=code&client_id=${process.env.REACT_APP_CLIENT_ID}&scope=user-read-recently-played%20user-top-read&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}`
+store.dispatch(fetchStatus())
 
 const handleStatus = (status) => {
     if (status) {
         return (
             <>
                 <div className="setup_status">
-                    <img src={ellipse_green}/>
+                    <img src={ellipse_green} />
                     <div className="setup_status_txt">
                         ONLINE
                     </div>
                 </div>
-                <div className="setup_button">
+                <Link to='/' className="setup_button">
                     <button className="setup_button_txt">ENTER</button>
-                </div>
+                </Link>
             </>
         )
     } else {
         return (
             <>
                 <div className="setup_status">
-                <img src={ellipse_red}/>
+                    <img src={ellipse_red} />
                     <div className="setup_status_txt">
                         OFFLINE
                     </div>
                 </div>
-                <div className="setup_button">
-                    <a className="setup_button_txt">START SETUP</a>
-                </div>
+                <a href={AUTH_URL} className="setup_button">
+                    <button className="setup_button_txt">START SETUP</button>
+                </a>
             </>
         )
     }
 }
 
 function Setup() {
+    const status = useSelector(selectStatus).filter(item => item.id.includes("stotify_status"))[0]
+
     return (
         <>
             <div className="setup_wrapper">
@@ -53,7 +59,7 @@ function Setup() {
                     <div className="setup_logo_name">
                         <a>STOTIFY</a>
                     </div>
-                    {handleStatus(true)}
+                    {handleStatus(status === undefined ? false : status.value)}
                 </div>
             </div>
         </>

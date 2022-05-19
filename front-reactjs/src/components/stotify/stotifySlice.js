@@ -48,6 +48,24 @@ export const fetchListeningStats = createAsyncThunk('stotify/fetchListeningStats
     return { id: "fetch_listening_stats", metric: "listStat", value: outputData }
 })
 
+export const fetchStotifyTopTracks = createAsyncThunk('stotify/fetchStotifyTopTracks', async() => {
+    let outputData = []
+    await fetch('http://127.0.0.1:5000/stotify/getTopTracks').then(res => res.json()).then(data => {
+        console.log("here is the data :")
+        console.log(data)
+        outputData = data.value
+    })
+    return { id:"fetch_stotify_top_tracks", metric:"stotify_top", value: outputData}
+})
+
+export const fetchStotifyTopArtists = createAsyncThunk('stotify/fetchStotifyTopArtists', async() => {
+    let outputData = []
+    await fetch('http://127.0.0.1:5000/stotify/getTopArtists').then(res => res.json()).then(data => {
+        outputData = data.value
+    })
+    return { id:"fetch_stotify_top_artists", metric:"stotify_top", value: outputData}
+})
+
 const stotifyAdapter = createEntityAdapter()
 const initialState = stotifyAdapter.getInitialState({})
 
@@ -66,6 +84,12 @@ const stotifySlice = createSlice({
                 stotifyAdapter.setOne(state, action.payload)
             })
             .addCase(fetchListeningStats.fulfilled, (state, action) => {
+                stotifyAdapter.setOne(state, action.payload)
+            })
+            .addCase(fetchStotifyTopTracks.fulfilled, (state, action) => {
+                stotifyAdapter.setOne(state, action.payload)
+            })
+            .addCase(fetchStotifyTopArtists.fulfilled, (state, action) => {
                 stotifyAdapter.setOne(state, action.payload)
             })
     }

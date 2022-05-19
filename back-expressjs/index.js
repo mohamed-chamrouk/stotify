@@ -1,5 +1,4 @@
 var express = require('express')
-var setup = require('./routers/setupHandler')
 var stotifyHandler = require('./routers/stotifyHandler')
 var dbHandler = require('./routers/dbHandler.js')
 var cors = require('cors')
@@ -10,7 +9,6 @@ var cookieParser = require('cookie-parser');
 const app = express();
 
 app.use(cors())
-app.use('', setup)
 app.use('', stotifyHandler)
 app.use('', dbHandler)
 
@@ -23,7 +21,7 @@ app.use(cookieParser());
  * @function
  */
 app.get('/', (req, res) => {
-    res.json({ bogus: 'boy' })
+    res.redirect('http://localhost:3000/')
 });
 
 app.get('/debug', (req, res) => {

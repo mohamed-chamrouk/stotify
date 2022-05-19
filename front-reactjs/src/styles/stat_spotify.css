@@ -12,22 +12,6 @@
     color: #838383;
 }
 
-.rank {
-    font-family: 'Inter Semi Bold';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 17px;
-    color: #1D413D;
-    text-align: center;
-}
-
-.track_img {
-    height: 40px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
 tr {
     background: white;
     margin-bottom: 30px;

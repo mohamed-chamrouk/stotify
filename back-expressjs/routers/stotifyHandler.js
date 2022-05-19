@@ -3,19 +3,17 @@ var SpotifyWebApi = require('spotify-web-api-node');
 var express = require('express')
 var router = express.Router()
 
-var setupModule = require('./setupHandler.js')
-var creds = setupModule.creds
 var dbHandlerModule = require('./dbHandler.js');
 
 var intervalAuthRunning = false;
 var intervalAuthStopper = false;
 var intervalFetchStatsRunning = false;
 var intervalFetchStatsStopper = false;
-
+console.log(process.env.STOTIFY_REDIRECT_URI)
 var spotifyApi = new SpotifyWebApi({
-    clientId: creds.clientId,
-    clientSecret: creds.clientSecret,
-    redirectUri: creds.redirect_uri
+    clientId: process.env.STOTIFY_CLIENT_ID,
+    clientSecret: process.env.STOTIFY_CLIENT_SECRET,
+    redirectUri: process.env.STOTIFY_REDIRECT_URI
 });
 
 /**
@@ -251,6 +249,14 @@ router.get('/getPopularityIndex', (req, res) => {
             console.error(`[stotify] @ ${(new Date()).toLocaleString()} - Something went wrong`, err)
             return err
         });
+})
+
+/**
+ * Gets the current status of the authentication loop for the Spotify API
+ * @returns A json object with the current status of the auth loop
+ */
+router.get('/getRunningStatus', (req, res) => {
+    res.json({status: intervalAuthRunning})
 })
 
 module.exports = router

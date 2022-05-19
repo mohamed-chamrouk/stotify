@@ -20,7 +20,7 @@ function StotifyGraph() {
                 </ResponsiveContainer>
             </div>
             <div className="graph_details">
-                <a> VOIR LES STATISTIQUES DETAILLES </a>
+                <a>VOIR LES STATISTIQUES DETAILLES  &#8594;</a>
             </div>
         </div>
     )
