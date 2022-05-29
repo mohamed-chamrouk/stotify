@@ -115,8 +115,8 @@ router.get("/callback", (req, res) => {
         console.log(`[stotify] @ ${(new Date()).toLocaleString()} - Successfully retrieved the tokens`)
     }, function (err) {
         if (err.statusCode === 400) {
-            console.error(`[stotify] @ ${(new Date()).toLocaleString()} - Authorization code expired, redirecting to the setup page`)
-            res.redirect('/setup')
+            console.error(`[stotify] @ ${(new Date()).toLocaleString()} - /callback - Authorization code expired, redirecting to the home page`)
+            res.redirect('/')
             return 'error'
         }
     }).then(function (txt) {

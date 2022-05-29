@@ -64,3 +64,12 @@ tr {
     padding-left: 5px;
     padding-right: 5px;
 }
+
+td {
+    height: 60px;
+    padding: 0px;
+}
+
+th {
+    height: 60px;
+}

@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk, createEntityAdapter, createSelector } fr
 export const fetchTopArtists = createAsyncThunk('spotify/fetchTopArtists', async (term = '', limit = "5") => {
     let topArtists = [];
     let arrayOutput = []
-    await fetch(`http://127.0.0.1:5000/spotify/getMyTopArtists?term=${term}&limit=5`).then(res => res.json()).then(data => {
+    await fetch(`http://127.0.0.1:5000/spotify/getMyTopArtists?term=${term}`).then(res => res.json()).then(data => {
         data.items.forEach((item) => {
             topArtists.push({ id: data.items.indexOf(item), name: item.name, image: item.images[2].url, link: item.external_urls.spotify })
         }
@@ -16,7 +16,7 @@ export const fetchTopArtists = createAsyncThunk('spotify/fetchTopArtists', async
 export const fetchTopTracks = createAsyncThunk('spotify/fetchTopTracks', async (term = '', limit = "5") => {
     let topTracks = [];
     let arrayOutput = []
-    await fetch(`http://127.0.0.1:5000/spotify/getMyTopTracks?term=${term}&limit=5`).then(res => res.json()).then(data => {
+    await fetch(`http://127.0.0.1:5000/spotify/getMyTopTracks?term=${term}`).then(res => res.json()).then(data => {
         data.items.forEach((item) => {
             topTracks.push({ id: data.items.indexOf(item), name: item.name, artist: item.artists[0].name, image: item.album.images[2].url, link: item.external_urls.spotify })
         })
