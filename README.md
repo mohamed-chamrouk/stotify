@@ -13,10 +13,12 @@ This app is nothing but a passion project.
 ### Setup
 On the first launch of the app you'll be met with the following page :
 
-<img src="" height=200px></img>
+<img src="https://github.com/mohamed-chamrouk/stotify/blob/main/doc-ressources/setup.png" height=300px></img>
 
 This page gives you the status of the app (also available within the app) and a button to launch or enter the app.
 For the first launch you'll be redirected to Spotify's login page to get the first access token with the required fields.
+
+This page will launch the two main clocks, the first one is used for refreshing the access token to the Spotify API using the refresh token. The second one is used to retrieve the user's recent tracks and feed them to the database.
 
 ## Technical Overview
 
@@ -46,7 +48,7 @@ The following librairies are used for the back-end app :
 
 ## Pages
 ### Home Page
-<img src="" height=200px></img>
+<img src="https://github.com/mohamed-chamrouk/stotify/blob/main/doc-ressources/home.png" height=300px></img>
 
 In this page you will find a summary of all the available statistics.
 
@@ -55,3 +57,8 @@ Following that a bar chart monitoring the time spent listening to music in the l
 Next up some stats about artists, albums and songs recorded in the database.
 Then the top stats provided by Spotify's API.
 Finally the Stotify's provided tops with a quick view of the number of listens for each entry.
+
+### Spotify
+<img src="https://github.com/mohamed-chamrouk/stotify/blob/main/doc-ressources/home_spotify.png" height=300px></img>
+
+This page displays the detailed statistics retrieved from the Spotify API with the choice of term (short, medium or long)
