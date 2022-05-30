@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import store from '../../store'
 import { fetchTopArtists, fetchTopTracks, selectTops } from './spotifySlice'
@@ -39,14 +40,14 @@ function SpotifyStats() {
                     </div>
                     <p>Musiques les plus écoutées</p>
                 </div>
-                <div className="stat_spotify_details">
-                    <a> VOIR LES STATISTIQUES DETAILLES </a>
-                </div>
+                <Link className="detailed_stats_button" to='/spotify'>
+                    <button className="detailed_stats_txt">VOIR LES STATISTIQUES DETAILLES  &#8594;</button>
+                </Link>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: '100%', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
                         <tr style={{ verticalAlign: 'middle' }}>
                             <th style={{ width: '60px' }}>Song art</th>
-                            <th style={{ width: '14%' }} />
+                            <th style={{ width: '18%' }} />
 
                             <th>Titre</th>
                         </tr>
@@ -63,14 +64,14 @@ function SpotifyStats() {
                     </div>
                     <p>Artistes les plus écoutées</p>
                 </div>
-                <div className="stat_spotify_details">
-                    <a> VOIR LES STATISTIQUES DETAILLES </a>
-                </div>
+                <Link className="detailed_stats_button" to='/spotify'>
+                    <button className="detailed_stats_txt">VOIR LES STATISTIQUES DETAILLES  &#8594;</button>
+                </Link>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: '100%', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
                         <tr style={{ verticalAlign: 'middle' }}>
                             <th style={{ width: '60px' }}>Song art</th>
-                            <th style={{ width: '14%' }} />
+                            <th style={{ width: '18%' }} />
 
                             <th>Titre</th>
                         </tr>

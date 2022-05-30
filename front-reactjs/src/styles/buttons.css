@@ -1,0 +1,26 @@
+.detailed_stats_button {
+    text-decoration: none;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.detailed_stats_txt {
+    text-decoration: none;
+    padding: 0;
+    border: none;
+    background: none;
+
+    font-family: 'Inter Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #838383;
+
+    cursor: pointer;
+}
+
+.detailed_stats_txt:hover {
+    color: #575757;
+}

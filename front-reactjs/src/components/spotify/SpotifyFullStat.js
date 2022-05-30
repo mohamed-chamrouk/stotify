@@ -2,18 +2,10 @@ import React from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import '../../../styles/home_spotify.css'
-import store from '../../../store'
-import { fetchTopArtists, fetchTopTracks, selectTops } from '../../spotify/spotifySlice'
-import SpotifyStatsItem from '../../spotify/SpotifyStatsItem'
-import SpotifyPlaceHolder from '../../spotify/SpotifyPlaceHolder'
-
-store.dispatch(fetchTopArtists("long_term"))
-store.dispatch(fetchTopTracks("long_term"))
-store.dispatch(fetchTopArtists("medium_term"))
-store.dispatch(fetchTopTracks("medium_term"))
-store.dispatch(fetchTopArtists("short_term"))
-store.dispatch(fetchTopTracks("short_term"))
+import '../../styles/home_spotify.css'
+import { selectTops } from './spotifySlice'
+import SpotifyStatsItem from './SpotifyStatsItem'
+import SpotifyPlaceHolder from './SpotifyPlaceHolder'
 
 function SpotifyFullStat() {
     const [term, setTerm] = useState("long_term")
@@ -57,9 +49,6 @@ function SpotifyFullStat() {
                     </div>
                     <p>Musiques les plus écoutées</p>
                 </div>
-                <div className="stat_spotify_details">
-                    <a> VOIR LES STATISTIQUES DETAILLES </a>
-                </div>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: 'inherit', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
                         <tr style={{ verticalAlign: 'middle' }}>
@@ -80,9 +69,6 @@ function SpotifyFullStat() {
                         SPOTIFY
                     </div>
                     <p>Artistes les plus écoutées</p>
-                </div>
-                <div className="stat_spotify_details">
-                    <a> VOIR LES STATISTIQUES DETAILLES </a>
                 </div>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: 'inherit', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
