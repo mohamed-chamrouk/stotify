@@ -15,7 +15,7 @@ function StotifyTopItem(props) {
             <td className="stotify-table-fois-container">
                 <div className="stotify-table-fois-inner-container">
                     <a className="stotify-table-number">{top.count}</a>
-                    <a className="stotify-table-fois">fois</a>
+                    <a className="stotify-table-fois">{top.count > 1 ? "times" : "time"}</a>
                 </div>
             </td>
         </tr>

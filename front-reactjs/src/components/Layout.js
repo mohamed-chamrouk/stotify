@@ -5,7 +5,7 @@ import stotify_logo from '../ressources/stotify_logo.svg'
 
 import store from '../store'
 
-import { fetchMinutes, fetchMisc, fetchListeningStats } from './stotify/stotifySlice'
+import { fetchMinutes, fetchMisc, fetchListeningTracksStats } from './stotify/stotifySlice'
 
 const handleRefresh = () => {
     store.dispatch(fetchMinutes({ days: 30, len: "short" }))
@@ -16,7 +16,7 @@ const handleRefresh = () => {
     store.dispatch(fetchMisc('tracks'))
     store.dispatch(fetchMisc('date'))
 
-    store.dispatch(fetchListeningStats(30))
+    store.dispatch(fetchListeningTracksStats(30))
 }
 
 function Layout() {

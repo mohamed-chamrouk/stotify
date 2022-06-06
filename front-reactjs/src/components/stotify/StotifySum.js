@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import store from '../../store.js'
@@ -6,10 +6,12 @@ import { fetchMinutes } from './stotifySlice';
 
 import { selectGoodMetrics } from './stotifySlice'
 
-store.dispatch(fetchMinutes({days: 30, len: "short"}))
-store.dispatch(fetchMinutes({days: 365, len:"long"}))
+const StotifySum = () => {
+    useEffect(() => {
+        store.dispatch(fetchMinutes({ days: 30, len: "short" }))
+        store.dispatch(fetchMinutes({ days: 365, len: "long" }))
+    }, [])
 
-const StotifySum = () => {    
     const minutes = useSelector(selectGoodMetrics)
     return (
         <>

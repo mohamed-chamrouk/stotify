@@ -1,14 +1,24 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
+import store from '../../store'
+import { fetchTopArtists, fetchTopTracks, selectTops } from './spotifySlice'
 import '../../styles/home_spotify.css'
-import { selectTops } from './spotifySlice'
 import SpotifyStatsItem from './SpotifyStatsItem'
 import SpotifyPlaceHolder from './SpotifyPlaceHolder'
 
 function SpotifyFullStat() {
     const [term, setTerm] = useState("long_term")
+
+    useEffect(() => {
+        store.dispatch(fetchTopArtists("long_term"))
+        store.dispatch(fetchTopTracks("long_term"))
+        store.dispatch(fetchTopArtists("medium_term"))
+        store.dispatch(fetchTopTracks("medium_term"))
+        store.dispatch(fetchTopArtists("short_term"))
+        store.dispatch(fetchTopTracks("short_term"))
+    }, [])
 
     const topArtist = useSelector(selectTops).filter(item => item.id.includes(`fetch_artists_${term}`))[0]
     const topTrack = useSelector(selectTops).filter(item => item.id.includes(`fetch_tracks_${term}`))[0]
@@ -24,7 +34,6 @@ function SpotifyFullStat() {
             <SpotifyStatsItem top={item} type={"track"} key={item.id} />
         )
     })
-
 
     return (
         <>

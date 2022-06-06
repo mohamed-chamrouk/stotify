@@ -69,7 +69,7 @@ function intervalFetchStats() {
                 })
         })
 
-        return recentTracks
+        return recentTracks.reverse()
     }, function (err) {
         console.error(`[stotify] @ ${(new Date()).toLocaleString()} - Somthing went wrong, redirecting to /setup...`)
         if (err.body.error.status === 401) {

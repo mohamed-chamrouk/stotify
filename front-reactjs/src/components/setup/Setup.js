@@ -1,7 +1,7 @@
 import store from '../../store'
 import { useSelector } from 'react-redux'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import '../../styles/setup.css'
 import logo from '../../ressources/stotify_logo.svg'
@@ -10,7 +10,6 @@ import ellipse_green from '../../ressources/ellipse_green.svg'
 
 import { fetchStatus, selectStatus } from './setupSlice'
 
-console.log(process.env.STOTIFY_REDIRECT_URI)
 const AUTH_URL = `https://accounts.spotify.com/authorize?Access-Control-Allow-Origin=%2A&response_type=code&client_id=${process.env.REACT_APP_CLIENT_ID}&scope=user-read-recently-played%20user-top-read&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}`
 store.dispatch(fetchStatus())
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -7,25 +7,24 @@ import { fetchTopArtists, fetchTopTracks, selectTops } from './spotifySlice'
 import SpotifyStatsItem from './SpotifyStatsItem'
 import SpotifyPlaceHolder from './SpotifyPlaceHolder'
 
-store.dispatch(fetchTopArtists("long_term"))
-store.dispatch(fetchTopTracks("long_term"))
-store.dispatch(fetchTopArtists("medium_term"))
-store.dispatch(fetchTopTracks("medium_term"))
-store.dispatch(fetchTopArtists("short_term"))
-store.dispatch(fetchTopTracks("short_term"))
 
 function SpotifyStats() {
+    useEffect(() => {
+        store.dispatch(fetchTopArtists("long_term"))
+        store.dispatch(fetchTopTracks("long_term"))
+    }, [])
+    
     const term = "long_term"
     const topArtist = useSelector(selectTops).filter(item => item.id.includes(`fetch_artists_${term}`))[0]
     const topTrack = useSelector(selectTops).filter(item => item.id.includes(`fetch_tracks_${term}`))[0]
 
-    const renderedArtistList = topArtist === undefined ? <SpotifyPlaceHolder type={"artist"} /> : topArtist.value.slice(0,5).map((item) => {
+    const renderedArtistList = topArtist === undefined ? <SpotifyPlaceHolder type={"artist"} /> : topArtist.value.slice(0, 5).map((item) => {
         return (
             <SpotifyStatsItem top={item} type={"artist"} key={item.id} />
         )
     })
 
-    const renderedTrackList = topTrack === undefined ? <SpotifyPlaceHolder type={"track"} /> : topTrack.value.slice(0,5).map((item) => {
+    const renderedTrackList = topTrack === undefined ? <SpotifyPlaceHolder type={"track"} /> : topTrack.value.slice(0, 5).map((item) => {
         return (
             <SpotifyStatsItem top={item} type={"track"} key={item.id} />
         )

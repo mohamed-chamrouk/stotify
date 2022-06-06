@@ -35,9 +35,9 @@ export const fetchMisc = createAsyncThunk('stotify/fetchMisc', async (type = 'ar
     return reqOutput
 })
 
-export const fetchListeningStats = createAsyncThunk('stotify/fetchListeningStats', async (days = 30) => {
+export const fetchListeningTracksStats = createAsyncThunk('stotify/fetchListeningTracksStats', async (days = 30) => {
     let outputData = []
-    await fetch(`http://127.0.0.1:5000/stotify/getPlayedStats?days=${days}`).then(res => res.json()).then(data => {
+    await fetch(`http://127.0.0.1:5000/stotify/getPlayedTracksStats?days=${days}`).then(res => res.json()).then(data => {
         for (const key in data) {
             outputData.push({
                 date: key,
@@ -45,14 +45,27 @@ export const fetchListeningStats = createAsyncThunk('stotify/fetchListeningStats
             })
         }
     })
-    return { id: "fetch_listening_stats", metric: "listStat", value: outputData }
+    outputData.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
+    return { id: "fetch_listening_tracks_stats", metric: "listStat", value: outputData }
+})
+
+export const fetchListeningMinutesStats = createAsyncThunk('stotify/fetchListeningMinutesStats', async (days = 30) => {
+    let outputData = []
+    await fetch(`http://127.0.0.1:5000/stotify/getPlayedMinutesStats?days=${days}`).then(res => res.json()).then(data => {
+        for (const key in data) {
+            outputData.push({
+                date: key,
+                value: data[key]/60000
+            })
+        }
+    })
+    outputData.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse()
+    return { id: "fetch_listening_minutes_stats", metric: "listStat", value: outputData }
 })
 
 export const fetchStotifyTopTracks = createAsyncThunk('stotify/fetchStotifyTopTracks', async() => {
     let outputData = []
     await fetch('http://127.0.0.1:5000/stotify/getTopTracks').then(res => res.json()).then(data => {
-        console.log("here is the data :")
-        console.log(data)
         outputData = data.value
     })
     return { id:"fetch_stotify_top_tracks", metric:"stotify_top", value: outputData}
@@ -83,7 +96,10 @@ const stotifySlice = createSlice({
             .addCase(fetchMisc.fulfilled, (state, action) => {
                 stotifyAdapter.setOne(state, action.payload)
             })
-            .addCase(fetchListeningStats.fulfilled, (state, action) => {
+            .addCase(fetchListeningTracksStats.fulfilled, (state, action) => {
+                stotifyAdapter.setOne(state, action.payload)
+            })
+            .addCase(fetchListeningMinutesStats.fulfilled, (state, action) => {
                 stotifyAdapter.setOne(state, action.payload)
             })
             .addCase(fetchStotifyTopTracks.fulfilled, (state, action) => {

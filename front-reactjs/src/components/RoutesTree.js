@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Home from './Home.js'
 import SpotifyHome from "./spotify/SpotifyHome.js";
+import StotifyHome from "./stotify/StotifyHome.js";
 import Setup from './setup/Setup.js'
 import Layout from "./Layout.js";
 
@@ -14,6 +15,7 @@ const RoutesTree = () => {
                 <Route element={<Layout/>}>
                     <Route path="/" element={<Home />} />
                     <Route path="/spotify" element={<SpotifyHome/>}/>
+                    <Route path="/stotify" element={<StotifyHome/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

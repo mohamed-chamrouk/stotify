@@ -40,7 +40,9 @@ function insertTracks(data) {
  */
 function getDelay(req) {
     const curDate = new Date()
-    const delay = (parseInt(req.query.days) ? req.query.days : 900000)
+    let difference = new Date().getTime() - new Date('2022-04-22').getTime()
+    const maxDelay = Math.ceil(difference / (1000*3600*24))
+    const delay = (parseInt(req.query.days) ? req.query.days : maxDelay)
     const resultDate = curDate.setDate(curDate.getDate() - delay)
     return resultDate
 }
@@ -138,7 +140,7 @@ router.get('/getFirstTrackDate', (req, res) => {
 * @returns {json} Json object with the date and the metric corresponding to it
 */
 router.get('/getMetricListenedTo', (req, res) => {
-    const metric = [/*'artists', "albums",*/ 'tracks', 'minutes'].includes(req.query.metric) ? req.query.metric : 'minutes'
+    const metric = ['tracks', 'minutes'].includes(req.query.metric) ? req.query.metric : 'minutes'
     const date_start = dateChecker(req.query.date_start, 'start')
     const date_end = dateChecker(req.query.date_end, 'end')
 
@@ -153,51 +155,30 @@ router.get('/getMetricListenedTo', (req, res) => {
                 res.json(data.map((item) => { return { date: item._id, track: item.trackName } }))
             })
             break;
-        /*case 'albums':
-            stotifyCollection.distinct("albumName").then(
-                function (data) {
-                    stotifyCollection.find({}).toArray((err, data) => {
-                        var albumIndex = []
-                        data.forEach()
-                    })
-                    console.log(data)
-                    res.json(data.map((item) => {return { date: item._id, track: item.albumName }} ))
-                }
-            )
-            break;
-        case 'artists':
-            stotifyCollection.distinct("artistName").then(
-                function (data) {
-                    res.json(data.map((item) => { return { date: item._id, track: item.artistName } }))
-                }
-            )
-            break;*/
         default:
             console.log(`[stotify] @ ${(new Date()).toLocaleString()} - No metric found`)
     }
 
 })
 
+const getDaysArray = function (start, end = new Date()) {
+    for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+        arr.push(new Date(dt));
+    }
+    let jsonOutput = {}
+    arr.forEach((v) => jsonOutput[v.toISOString().slice(0, 10)] = 0);
+    return jsonOutput
+};
+
 /**
-* Get how many/much of the metric you've listened to between the two dates given
-* @name get/getPlayedStats
+* Get how many tracks you've listened to in the past given days
+* @name get/getPlayedTracksStats
 * @function
 * @memberof module:routers/dbHandler
-* @param {string} metric The metric for the analytic result, either minutes or tracks (albums and artists)
-* @param {string} date_start The beginning of the time range, defaults to the first Date
-* @param {string} date_end The end of the time range, defaults to the request's date
+* @param {string} days The number of days to which the api will go back to
 * @returns {json} Json object with the date and the metric corresponding to it
 */
-router.get('/stotify/getPlayedStats', (req, res) => {
-    const getDaysArray = function (start, end = new Date()) {
-        for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
-            arr.push(new Date(dt));
-        }
-        let jsonOutput = {}
-        arr.forEach((v) => jsonOutput[v.toISOString().slice(0, 10)] = 0);
-        return jsonOutput
-    };
-
+router.get('/stotify/getPlayedTracksStats', (req, res) => {
     stotifyCollection.find({}).toArray((err, data) => {
         let statOutput = getDaysArray(getDelay(req))
         data.forEach((item) => {
@@ -207,8 +188,26 @@ router.get('/stotify/getPlayedStats', (req, res) => {
 
         res.json(statOutput)
     })
+})
 
+/**
+* Get how much minutes you've listened to in the past given days
+* @name get/getPlayedMinutesStats
+* @function
+* @memberof module:routers/dbHandler
+* @param {string} days The number of days to which the api will go back to
+* @returns {json} Json object with the date and the metric corresponding to it
+*/
+router.get('/stotify/getPlayedMinutesStats', (req, res) => {
+    stotifyCollection.find({}).toArray((err, data) => {
+        let statOutput = getDaysArray(getDelay(req))
+        data.forEach((item) => {
+            index = item._id.slice(0, 10)
+            typeof (statOutput[index]) === "number" ? statOutput[index] = statOutput[index] + item.trackDuration : statOutput[index] = item.trackDuration
+        })
 
+        res.json(statOutput)
+    })
 })
 
 /**

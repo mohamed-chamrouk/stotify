@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 
 import store from '../../store'
 import '../../styles/buttons.css'
-import { fetchListeningStats, selectMetrics } from './stotifySlice'
-
-store.dispatch(fetchListeningStats(29))
+import { fetchListeningTracksStats, selectMetrics } from './stotifySlice'
+import { useEffect } from 'react';
 
 function StotifyGraph() {
-    const listStat = useSelector(selectMetrics).filter(item => item.id.includes("fetch_listening_stats"))[0]
+    useEffect(() => {
+        store.dispatch(fetchListeningTracksStats(29))
+    }, [])
+
+    const listStat = useSelector(selectMetrics).filter(item => item.id.includes("fetch_listening_tracks_stats"))[0]
+
     return (
         <div className="main_graph">
             <p>Statistiques sur les 30 derniers jours</p>
@@ -21,7 +25,7 @@ function StotifyGraph() {
                 </ResponsiveContainer>
             </div>
             <div className="graph_details">
-                <Link className="detailed_stats_button" to='/spotify'>
+                <Link className="detailed_stats_button" to='/stotify'>
                     <button className="detailed_stats_txt">VOIR LES STATISTIQUES DETAILLES  &#8594;</button>
                 </Link>
             </div>

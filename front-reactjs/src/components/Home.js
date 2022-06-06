@@ -12,10 +12,17 @@ import StotifyStats from './stotify/StotifyStats'
 import StotifyGraph from './stotify/StotifyGraph'
 import SpotifyStats from './spotify/SpotifyStats'
 import StotifyTop from './stotify/StotifyTop'
+import { fetchMisc } from './stotify/stotifySlice'
+import store from '../store'
 
 function Home() {
     useEffect(() => {
-        window.scrollTo({top:0, behavior: 'smooth'})
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+
+        store.dispatch(fetchMisc('artists'))
+        store.dispatch(fetchMisc('albums'))
+        store.dispatch(fetchMisc('tracks'))
+        store.dispatch(fetchMisc('date'))
     }, [])
 
     return (
@@ -29,7 +36,7 @@ function Home() {
             {/* Top stats spotify */}
             <SpotifyStats />
             {/* Top stats statify */}
-            <StotifyTop />
+            <StotifyTop length="5" />
         </>
 
     )

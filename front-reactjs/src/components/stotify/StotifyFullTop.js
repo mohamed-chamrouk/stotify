@@ -1,40 +1,33 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import store from '../../store'
-import { fetchStotifyTopArtists, fetchStotifyTopTracks, selectMetrics } from './stotifySlice'
+import { fetchMinutes, fetchMisc, fetchListeningStats, fetchStotifyTopTracks, fetchStotifyTopArtists, selectMetrics } from './stotifySlice'
+import '../../styles/home_stotify.css'
 import StotifyTopItem from './StotifyTopItem'
 import StotifyPlaceHolder from './StotifyPlaceHolder'
 
-function StotifyTop(props) {
-    let { length, type } = props
-    length = parseInt(length)
-
+function StotifyFullTop() {
     useEffect(() => {
-        store.dispatch(fetchStotifyTopArtists())
-        store.dispatch(fetchStotifyTopTracks())
+        store.dispatch(fetchStotifyTopArtists("long_term", "5"))
+        store.dispatch(fetchStotifyTopTracks("long_term", "5"))
     }, [])
 
     const topArtist = useSelector(selectMetrics).filter(item => item.id.includes("fetch_stotify_top_artists"))[0]
     const topTrack = useSelector(selectMetrics).filter(item => item.id.includes("fetch_stotify_top_tracks"))[0]
 
-    const renderedArtistList = topArtist === undefined || topArtist.value === undefined ? <StotifyPlaceHolder type={"artist"} /> : topArtist.value.slice(0, topArtist.value.length > length ? length : topArtist.value.length - 1).map((item) => {
+    const renderedArtistList = topArtist === undefined || topArtist.value === undefined ? <StotifyPlaceHolder type={"artist"} /> : topArtist.value.map((item) => {
         return (
             <StotifyTopItem top={item} rank={topArtist.value.indexOf(item) + 1} type={"artists"} key={topArtist.value.indexOf(item) + 1} />
         )
     })
 
-    const renderedTrackList = topTrack === undefined || topTrack.value === undefined ? <StotifyPlaceHolder type={"track"} /> : topTrack.value.slice(0, topTrack.value.length > length ? length : topTrack.value.length).map((item) => {
+    const renderedTrackList = topTrack === undefined || topTrack.value === undefined ? <StotifyPlaceHolder type={"track"} /> : topTrack.value.map((item) => {
         return (
             <StotifyTopItem top={item} rank={topTrack.value.indexOf(item) + 1} type={"tracks"} key={topTrack.value.indexOf(item) + 1} />
         )
     })
-
-    const renderDetail = type === "full" ? <></> :
-        <Link className="detailed_stats_button" to='/stotify'>
-            <button className="detailed_stats_txt">VOIR LES STATISTIQUES DETAILLES  &#8594;</button>
-        </Link>
 
     return (
         <>
@@ -45,12 +38,14 @@ function StotifyTop(props) {
                     </div>
                     <p>Musiques les plus écoutées</p>
                 </div>
-                {renderDetail}
-                <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: 'inherit', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
+                <div className="stat_statify_details">
+                    <a> VOIR LES STATISTIQUES DETAILLES </a>
+                </div>
+                <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: '100%', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
                         <tr style={{ verticalAlign: 'middle' }}>
                             <th style={{ width: '60px' }} />
-                            <th style={{ width: '60px' }}>Song art</th>
+                            <th style={{ width: '14%' }}>Song art</th>
                             <th>Titre</th>
                             <th>Titre</th>
                         </tr>
@@ -67,12 +62,14 @@ function StotifyTop(props) {
                     </div>
                     <p>Artistes les plus écoutées</p>
                 </div>
-                {renderDetail}
-                <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: 'inherit', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
+                <div className="stat_statify_details">
+                    <a> VOIR LES STATISTIQUES DETAILLES </a>
+                </div>
+                <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: '100%', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
                         <tr style={{ verticalAlign: 'middle' }}>
                             <th style={{ width: '60px' }} />
-                            <th style={{ width: '60px' }}>Song art</th>
+                            <th style={{ width: '14%' }}>Song art</th>
                             <th>Titre</th>
                             <th>Titre</th>
                         </tr>
@@ -86,4 +83,4 @@ function StotifyTop(props) {
     )
 }
 
-export default StotifyTop
+export default StotifyFullTop
