@@ -4,7 +4,7 @@ function SpotifyStatsItem(props) {
     if (type === "artist") {
         desc = <></>
     } else {
-        desc = <><br />de {top.artist}</>
+        desc = <><br />by {top.artist}</>
     }
 
     return (

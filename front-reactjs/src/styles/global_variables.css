@@ -1,0 +1,48 @@
+#root {
+    --accent-color: #6DF0D1;
+    --accent-color-hover: #68e7ca;
+    --accent-color-active: #5dc5ad;
+
+    --primary-color: white;
+    --secondary-color: #F8F8F8;
+    --secondary-color-active: #e8e8e8;
+
+    --scrollbar-thumb: #888;
+    --scrollbar-thumb-hover: rgb(155, 155, 155);
+
+    --text-color: #1D413D;
+    --secondary-text-color: #838383;
+    --secondary-text-color-hover: #575757;
+
+    --rdp-accent-color: var(--accent-color);
+    --rdp-outline: var(--accent-color-hover);
+    --rdp-outline-selected: var(--accent-color-active);
+    --rdp-background-color: var(--secondary-color);
+
+    --gradient-start: #00000000;
+
+    background-color: var(--primary-color);
+}
+
+[data-theme="dark"] #root {
+    --accent-color: #0e8671;
+    --accent-color-hover: #158773;
+    --accent-color-active: #308778;
+
+    --primary-color: #181a1b;
+    --secondary-color: #1c1e1f;
+    --secondary-color-active: #25282a;
+
+    --text-color: #cac6bf;
+    --secondary-text-color: #9a9184;
+    --secondary-text-color-hover: #b1aaa0;
+
+    --rdp-accent-color: var(--accent-color);
+    --rdp-outline: var(--accent-color-hover);
+    --rdp-outline-selected: var(--accent-color-active);
+    --rdp-background-color: var(--secondary-color);
+
+    --gradient-start: #ffffff00;
+
+    background-color: var(--primary-color);
+}

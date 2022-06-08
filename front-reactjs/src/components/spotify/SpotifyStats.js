@@ -37,10 +37,10 @@ function SpotifyStats() {
                     <div className="stat_indicator">
                         SPOTIFY
                     </div>
-                    <p>Musiques les plus écoutées</p>
+                    <p>Top Tracks</p>
                 </div>
                 <Link className="detailed_stats_button" to='/spotify'>
-                    <button className="detailed_stats_txt">VOIR LES STATISTIQUES DETAILLES  &#8594;</button>
+                    <button className="detailed_stats_txt">DETAILED STATISTICS  &#8594;</button>
                 </Link>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: '100%', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
@@ -61,10 +61,10 @@ function SpotifyStats() {
                     <div className="stat_indicator">
                         SPOTIFY
                     </div>
-                    <p>Artistes les plus écoutées</p>
+                    <p>Top Artists</p>
                 </div>
                 <Link className="detailed_stats_button" to='/spotify'>
-                    <button className="detailed_stats_txt">VOIR LES STATISTIQUES DETAILLES  &#8594;</button>
+                    <button className="detailed_stats_txt">DETAILED STATISTICS  &#8594;</button>
                 </Link>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: '100%', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>

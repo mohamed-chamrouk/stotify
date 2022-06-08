@@ -16,11 +16,11 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    color: #838383;
+    color: var(--secondary-text-color);
 
     cursor: pointer;
 }
 
 .detailed_stats_txt:hover {
-    color: #575757;
+    color: var(--secondary-text-color-hover);
 }

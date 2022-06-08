@@ -1,10 +1,3 @@
-#root {
-    --rdp-accent-color: #6DF0D1;
-    --rdp-outline: #50b3a9;
-    --rdp-outline-selected: #50b3a9;
-    --rdp-background-color: #F8F8F8;
-}
-
 input {
     border: none;
     text-align: center;
@@ -12,6 +5,8 @@ input {
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .ma2 {
@@ -24,6 +19,14 @@ input {
     justify-content: center;
 }
 
+.rdp-caption {
+    color: var(--text-color);
+}
+
+.rdp-head {
+    color: var(--text-color);
+}
+
 .home_stotify_graph_container {
     grid-column: 2/6;
     grid-row: 2/6;
@@ -33,7 +36,7 @@ input {
 }
 
 .home_stotify_main_graph {
-    background: #F8F8F8;
+    background: var(--secondary-color);
 
     display: flex;
     flex-direction: column;
@@ -72,7 +75,7 @@ input {
     font-weight: 500;
     font-size: 16px;
     line-height: 17px;
-    color: #000000;
+    color: var(--text-color);
 
     margin-bottom: 38px;
     padding: 0px;

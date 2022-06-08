@@ -38,13 +38,13 @@ function SpotifyFullStat() {
     return (
         <>
             <div className="select-buttons-div">
-                Selection de la durée
+                Term selection
                 <div className="select-buttons">
                     <div className="select-div">
-                        <button className="select-button" onClick={() => setTerm("short_term")}>COURT</button>
+                        <button className="select-button" onClick={() => setTerm("short_term")}>SHORT</button>
                     </div>
                     <div className="select-div">
-                        <button className="select-button" onClick={() => setTerm("medium_term")}>MOYEN</button>
+                        <button className="select-button" onClick={() => setTerm("medium_term")}>MEDIUM</button>
                     </div>
                     <div className="select-div">
                         <button className="select-button" onClick={() => setTerm("long_term")}>LONG</button>
@@ -56,7 +56,7 @@ function SpotifyFullStat() {
                     <div className="stat_indicator">
                         SPOTIFY
                     </div>
-                    <p>Musiques les plus écoutées</p>
+                    <p>Top Tracks</p>
                 </div>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: 'inherit', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>
@@ -77,7 +77,7 @@ function SpotifyFullStat() {
                     <div className="stat_indicator">
                         SPOTIFY
                     </div>
-                    <p>Artistes les plus écoutées</p>
+                    <p>Top Artists</p>
                 </div>
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: 'inherit', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
                     <thead style={{ visibility: 'collapse' }}>

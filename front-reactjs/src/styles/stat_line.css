@@ -22,7 +22,7 @@
     gap: 5px;
     padding-top: 13px;
     padding-bottom: 13px;
-    background: #F8F8F8;
+    background: var(--secondary-color);
 }
 
 .stat_generic>p {
@@ -32,7 +32,7 @@
     font-size: 16px;
     line-height: 19px;
     text-align: center;
-    color: #1D413D;
+    color: var(--text-color);
 }
 
 .stat_generic>a {
@@ -41,5 +41,5 @@
     font-weight: 700;
     font-size: 48px;
     line-height: 58px;
-    color: #1D413D;
+    color: var(--text-color);
 }

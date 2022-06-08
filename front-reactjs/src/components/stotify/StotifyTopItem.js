@@ -4,7 +4,7 @@ function StotifyTopItem(props) {
     if (type === "artists") {
         desc = <></>
     } else {
-        desc = <><br />de {top.artist}</>
+        desc = <><br />by {top.artist}</>
     }
 
     return (

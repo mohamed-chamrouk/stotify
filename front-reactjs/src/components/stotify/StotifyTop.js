@@ -33,7 +33,7 @@ function StotifyTop(props) {
 
     const renderDetail = type === "full" ? <></> :
         <Link className="detailed_stats_button" to='/stotify'>
-            <button className="detailed_stats_txt">VOIR LES STATISTIQUES DETAILLES  &#8594;</button>
+            <button className="detailed_stats_txt">DETAILED STATISTICS  &#8594;</button>
         </Link>
 
     return (
@@ -43,7 +43,7 @@ function StotifyTop(props) {
                     <div className="stat_indicator">
                         STOTIFY
                     </div>
-                    <p>Musiques les plus écoutées</p>
+                    <p>Top Tracks</p>
                 </div>
                 {renderDetail}
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: 'inherit', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>
@@ -65,7 +65,7 @@ function StotifyTop(props) {
                     <div className="stat_indicator">
                         STOTIFY
                     </div>
-                    <p>Artistes les plus écoutées</p>
+                    <p>Top Artists</p>
                 </div>
                 {renderDetail}
                 <table className="table-info" style={{ tableLayout: 'fixed', width: '100%', height: 'inherit', marginTop: '0px', paddingLeft: '11px', paddingRight: '11px', borderSpacing: '0 6px' }}>

@@ -34,7 +34,7 @@
     font-size: 54px;
     line-height: 47px;
     text-align: center;
-    color: #6DF0D1;
+    color: var(--accent-color);
 }
 
 .setup_status {
@@ -61,7 +61,7 @@
 
     text-align: center;
 
-    color: #C8C8C8;
+    color: var(--secondary-text-color);
 }
 
 .setup_button {
@@ -71,7 +71,7 @@
     justify-content: center;
     align-items: center;
     padding: 15px 0px;
-    background: #F8F8F8;
+    background: var(--secondary-color);
     cursor: pointer;
     width:100%
 }
@@ -95,11 +95,11 @@
 
     text-align: center;
 
-    color: #1D413D;
+    color: var(--text-color);
 }
 
 .setup_button:hover {
-    box-shadow: 6px 6px #000000;
+    box-shadow: 6px 6px var(--text-color);
     background-color: #e0e0e0;
     -webkit-transform: translateX(-3px);
     transform: translateX(-3px);
@@ -109,7 +109,7 @@
 .setup_button:active {
     -webkit-transform: translateX(3px);
     transform: translateX(3px);
-    box-shadow: 0px 0px #000000;
-    background-color: #c5c5c5;
+    box-shadow: 0px 0px var(--text-color);
+    background-color: var(--secondary-color-active);
     transition: .15s ease;
 }

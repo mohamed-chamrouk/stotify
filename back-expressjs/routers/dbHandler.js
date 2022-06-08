@@ -27,7 +27,7 @@ var router = express.Router()
  */
 function insertTracks(data) {
     stotifyCollection.insertMany(data, (err, results) => {
-        if (err.code && err.code === 11000) {
+        if (err?.code && err?.code === 11000) {
             console.log(`[stotify] @ ${(new Date()).toLocaleString()} - MongoDB : Some insert clashed with existing entries.`)
         }
     })

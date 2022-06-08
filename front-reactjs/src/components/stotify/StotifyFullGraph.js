@@ -85,8 +85,6 @@ function StotifyGraph() {
         }
     }))
 
-    console.log(shortListMinutesStat)
-
     const stotifyMainGraph = (text, dataList) => {
         return (
             <div className="home_stotify_graph">

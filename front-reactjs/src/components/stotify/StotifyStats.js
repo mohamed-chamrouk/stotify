@@ -19,7 +19,7 @@ function StotifyStats() {
     return (
         <div className="main_stat">
             <div className="stat_misc_one stat_generic">
-                <p>Artistes</p>
+                <p>Artists</p>
                 <a>{misc.misc_tartists === undefined ? "..." : misc.misc_tartists.value}</a>
             </div>
             <div className="stat_misc_two stat_generic">
@@ -27,11 +27,11 @@ function StotifyStats() {
                 <a>{misc.misc_talbums === undefined ? "..." : misc.misc_talbums.value}</a>
             </div>
             <div className="stat_misc_three stat_generic">
-                <p>Musiques</p>
+                <p>Tracks</p>
                 <a>{misc.misc_ttracks === undefined ? "..." : misc.misc_ttracks.value}</a>
             </div>
             <div className="stat_misc_four stat_generic">
-                <p>Depuis</p>
+                <p>Since</p>
                 <a>{handleDate(misc.misc_tdate)}</a>
             </div>
         </div>

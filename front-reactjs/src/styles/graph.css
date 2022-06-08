@@ -11,7 +11,7 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 17px;
-    color: #000000;
+    color: var(--text-color);
 }
 
 .graph_details {
@@ -20,7 +20,7 @@
 }
 
 .graph_details>a:hover {
-    color: #383838;
+    color: var(--secondary-text-color-hover);
     transition: 0.2s ease;
     cursor: pointer;
 }
@@ -31,5 +31,5 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    color: #838383;
+    color: var(--secondary-text-color);
 }

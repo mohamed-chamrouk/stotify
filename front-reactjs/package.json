@@ -4,26 +4,23 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.1.1",
-    "@testing-library/user-event": "^13.5.0",
     "cors": "^2.8.5",
     "date-fns": "^2.28.0",
     "react": "^18.1.0",
+    "react-cookie": "^4.1.1",
     "react-day-picker": "^8.0.6",
     "react-dom": "^18.0.0",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "recharts": "^2.1.9",
-    "web-vitals": "^2.1.4"
+    "recharts": "^2.1.9"
   },
   "scripts": {
-    "start": "export REACT_APP_CLIENT_ID=0ee1b1beee59455681646cd0a8967a15 && export REACT_APP_REDIRECT_URI=\"http%3A%2F%2F127.0.0.1%3A5000%2Fcallback\" && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-api": "export STOTIFY_CLIENT_ID=0ee1b1beee59455681646cd0a8967a15 && export STOTIFY_REDIRECT_URI=\"http://127.0.0.1:5000/callback\" && export STOTIFY_CLIENT_SECRET=\"4d897a1e59b9427b83e5a5c3293d136b\" && cd ../back-expressjs && npm run dev"
+    "start-api": "cd ../back-expressjs && npm run dev"
   },
   "eslintConfig": {
     "extends": [
