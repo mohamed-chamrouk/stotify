@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.40ab1b9d.css",
+    "main.js": "/static/js/main.270b13f4.js",
+    "static/media/Inter-ExtraLightItalic-BETA.woff": "/static/media/Inter-ExtraLightItalic-BETA.09ba9d55ee78e2dde20b.woff",
+    "static/media/Inter-ThinItalic-BETA.woff": "/static/media/Inter-ThinItalic-BETA.b53ead3aa2a8cb08d4c0.woff",
+    "static/media/Inter-LightItalic-BETA.woff": "/static/media/Inter-LightItalic-BETA.67f9e6c1beb2e5ae0c25.woff",
+    "static/media/Inter-ExtraBoldItalic.woff": "/static/media/Inter-ExtraBoldItalic.4863fd0fadf069437591.woff",
+    "static/media/Inter-BoldItalic.woff": "/static/media/Inter-BoldItalic.a904cde5bbd069b11a92.woff",
+    "static/media/Inter-SemiBoldItalic.woff": "/static/media/Inter-SemiBoldItalic.9246acc9218487267a9c.woff",
+    "static/media/Inter-MediumItalic.woff": "/static/media/Inter-MediumItalic.281925df3a01f37ae833.woff",
+    "static/media/Inter-BlackItalic.woff": "/static/media/Inter-BlackItalic.04ab4e7eec79221607b4.woff",
+    "static/media/Inter-Thin-BETA.woff": "/static/media/Inter-Thin-BETA.afa43f73396191a91481.woff",
+    "static/media/Inter-ExtraLight-BETA.woff": "/static/media/Inter-ExtraLight-BETA.7fdc10980cffeaf49bf6.woff",
+    "static/media/Inter-Light-BETA.woff": "/static/media/Inter-Light-BETA.2ff55d31b8db224390de.woff",
+    "static/media/Inter-ExtraBold.woff": "/static/media/Inter-ExtraBold.64fb1a677308ca97dc65.woff",
+    "static/media/Inter-Bold.woff": "/static/media/Inter-Bold.00dc41b74c73bd548602.woff",
+    "static/media/Inter-SemiBold.woff": "/static/media/Inter-SemiBold.34489dd47473bf485abb.woff",
+    "static/media/Inter-Italic.woff": "/static/media/Inter-Italic.4722018a7f9ae421db3c.woff",
+    "static/media/Inter-Medium.woff": "/static/media/Inter-Medium.e03c0ca5d884e95176c1.woff",
+    "static/media/Inter-Black.woff": "/static/media/Inter-Black.d61d35be8a792e1ed278.woff",
+    "static/media/Inter-Regular.woff": "/static/media/Inter-Regular.3de4f43fdebbce1657f2.woff",
+    "static/media/stotify_dark_logo.svg": "/static/media/stotify_dark_logo.e5ceef68e8befcf5724d87a7e11ab0a4.svg",
+    "static/media/stotify_logo.svg": "/static/media/stotify_logo.95be46f2dccd8af1a8536af7387947df.svg",
+    "index.html": "/index.html",
+    "static/media/ellipse_green.svg": "/static/media/ellipse_green.082e9b219b9f440d2e76bba3ef0673a2.svg",
+    "static/media/ellipse_red.svg": "/static/media/ellipse_red.c2799b91902069d1ea69540ee5aad366.svg",
+    "main.40ab1b9d.css.map": "/static/css/main.40ab1b9d.css.map",
+    "main.270b13f4.js.map": "/static/js/main.270b13f4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.40ab1b9d.css",
+    "static/js/main.270b13f4.js"
+  ]
+}

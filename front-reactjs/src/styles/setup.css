@@ -1,5 +1,10 @@
-.setup_wrapper {
+.setup_holder {
+    width: 100%;
+    height: 10000px;
+    background-color: var(--primary-color);
+}
 
+.setup_wrapper {
     position: fixed;
     display: grid;
     grid-template-columns: repeat(3, 240px);
@@ -10,6 +15,9 @@
     height: 100%;
     justify-content: center;
     align-items: center;
+
+    padding: 0px;
+    margin: 0px;
 }
 
 .setup_container {
@@ -100,7 +108,7 @@
 
 .setup_button:hover {
     box-shadow: 6px 6px var(--text-color);
-    background-color: #e0e0e0;
+    background-color: var(--secondary-color);
     -webkit-transform: translateX(-3px);
     transform: translateX(-3px);
     transition: .5s ease;
