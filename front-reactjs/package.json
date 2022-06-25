@@ -16,11 +16,11 @@
     "recharts": "^2.1.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "export REACT_APP_CLIENT_ID=YOUR_CLIENT_ID && export REACT_APP_REDIRECT_URI=\"http%3A%2F%2F127.0.0.1%3A5000%2Fcallback\" && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-api": "cd ../back-expressjs && npm run dev"
+    "start-api": "export STOTIFY_CLIENT_ID=YOUR_CLIENT_ID && export STOTIFY_REDIRECT_URI=\"http://127.0.0.1:5000/callback\" && export STOTIFY_CLIENT_SECRET=\"YOUR_SECRET\" && cd ../back-expressjs && npm run dev"
   },
   "eslintConfig": {
     "extends": [
