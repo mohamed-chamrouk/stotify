@@ -8,6 +8,8 @@ This app is nothing but a passion project.
 
 ## Deploying the app
 
+*WIP*
+
 ## Usage
 
 ### Setup
@@ -46,6 +48,8 @@ The following librairies are used for the back-end app :
 
 ### Docker
 
+*WIP*
+
 ## Pages
 ### Home Page
 <img src="https://github.com/mohamed-chamrouk/stotify/blob/main/doc-ressources/home.png" height=300px></img>
@@ -62,3 +66,8 @@ Finally the Stotify's provided tops with a quick view of the number of listens f
 <img src="https://github.com/mohamed-chamrouk/stotify/blob/main/doc-ressources/home_spotify.png" height=300px></img>
 
 This page displays the detailed statistics retrieved from the Spotify API with the choice of term (short, medium or long)
+
+### Stotify
+<img src="https://github.com/mohamed-chamrouk/stotify/blob/main/doc-ressources/home_stotify.png" height=300px></img>
+
+This page displays the detailed statistics retrieved from the local database, you can sort the stats using the calendar component.
